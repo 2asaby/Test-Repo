@@ -30,7 +30,7 @@ pipeline {
                                 script {
                                     sh '''
                                         docker build -t 2asaby/devops:jenkins-test .
-                                        echo ${DOCKER_REGISTRY_PWD} | docker login -u ${DOCKER_REGISTRY_USER} --pasword-stdin
+                                        echo ${DOCKER_REGISTRY_PWD} | docker login -u ${DOCKER_REGISTRY_USER} --password-stdin
                                         docker push 2asaby/devops:jenkins-test
                                     '''
 
