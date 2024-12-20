@@ -1,9 +1,14 @@
 pipeline {
     agent any
+    environment {
+        JAVA_HOME = '/path/to/java/home' // Replace with the correct path
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
+    }
     stages {
         stage('Build') {
             steps {
                 echo 'Building the Java application'
+
                 sh './mvnw clean package'
             }
         }
