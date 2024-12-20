@@ -23,20 +23,20 @@ pipeline {
         }
         stage('Docker build and push') {
             steps {
-            echo 'building and push docker image to dockerhub'
-            withCredentials([usernamePassword(credentialsId: 'dockerhub', 
-                            passwordVariable: 'DOCKER_REGISTRY_PWD',
-                            usernameVariable: 'DOCKER_REGISTRY_USER')]) {
-                                script {
-                                    sh '''
-                                        docker build -t 2asaby/devops:jenkins-test .
-                                        echo ${DOCKER_REGISTRY_PWD} | docker login -u ${DOCKER_REGISTRY_USER} --password-stdin
-                                        docker push 2asaby/devops:jenkins-test
-                                    '''
+                echo 'building and push docker image to dockerhub'
+                withCredentials([usernamePassword(credentialsId: 'dockerhub',
+                                                  passwordVariable: 'DOCKER_REGISTRY_PWD',
+                                                  usernameVariable: 'DOCKER_REGISTRY_USER')]) {
+                    script {
+                        sh '''
+                            docker build -t 2asaby/devops:jenkins-test .
+                            echo ${DOCKER_REGISTRY_PWD} | docker login -u ${DOCKER_REGISTRY_USER} --password-stdin
+                            docker push 2asaby/devops:jenkins-test
+                        '''
 
-                                }
+                    }
 
-                            }
+                }
             }
 
 
