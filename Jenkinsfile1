@@ -22,6 +22,7 @@ pipeline {
             }
         }
         stage('Docker build and push') {
+            steps {
             echo 'building and push docker image to dockerhub'
             withCredentials([usernamePassword(credentialsId: 'dockerhub', 
                             passwordVariable: 'DOCKER_REGISTRY_PWD',
@@ -36,6 +37,7 @@ pipeline {
                                 }
 
                             }
+            }
 
 
         }
