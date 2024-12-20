@@ -3,15 +3,15 @@ pipeline {
     tools {
         maven 'maven' // Use the name you configured in Jenkins
     }
-    environment {
+    /*environment {
         JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64' // Replace with the correct path
         PATH = "${JAVA_HOME}/bin:${env.PATH}"
-    }
+    }*/
     stages {
         stage('Build') {
             steps {
                 echo 'Building the Java application'
-                sh 'mvn clean package'
+              //  sh 'mvn clean package'
                 sh './mvnw clean package'
             }
         }
