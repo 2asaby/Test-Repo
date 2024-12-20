@@ -1,4 +1,9 @@
 pipeline {
+    environment {
+        registry = "https://hub.docker.com/repository/docker/2asaby/devops"
+        registryCredential = 'dockerhub'
+        dockerImage = ''
+    }
     agent any
    /* tools {
         maven 'maven' // Use the name you configured in Jenkins
