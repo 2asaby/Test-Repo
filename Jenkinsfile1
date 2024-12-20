@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        JAVA_HOME = '/path/to/java/home' // Replace with the correct path
+        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64' // Replace with the correct path
         PATH = "${JAVA_HOME}/bin:${env.PATH}"
     }
     stages {
