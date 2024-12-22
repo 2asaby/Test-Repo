@@ -20,6 +20,7 @@ ssh remote_username@remote_host (ssh to remote machine)
 sudo deluser <user name> (delete user)
 sudo vim /etc/hostname (to get name of machine or change it)
 sudo apt-get install vim (install vim on ubuntu)
+sudo vim /etc/hosts (to set internal DNS of machine .. add ip and name)
 
 
 * to build docker image from Dockerfile and push that image to docker hub in jenkinsfile :
