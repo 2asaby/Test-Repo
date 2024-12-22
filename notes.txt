@@ -4,7 +4,7 @@ cat /etc/group (show all user groups)
 git remote -v (show existing connection to which repo on github)
 ssh-keygen (create ssh rsa public and private key)
 ssh-keygen -t ecdsa (change type of generated public and private keys from rsa to ecdsa)
-ssh-copy-id -i ~/.ssh/mykey user@host (copy ssh public id from machine to another machine to ssh without password)
+ssh-copy-id -i ~/.ssh/id_rsa.pub user@host (copy ssh public id from machine to another machine to ssh without password)
 cd /var/lib/jenkins (path of jenkins on my machine )
 :wq! (force save when using vim )
 :qa (quit vim without saving)
@@ -61,4 +61,13 @@ to install Ansible on machine we must meet that prerequisites :
 ( User privilege specification
 root    ALL=(ALL:ALL) ALL  // this previously exist 
 ansible  ALL=(ALL) NOPASSWD: ALL //add this line and type :wq! to force save to Granting Administrative Privileges )
-4-we can Granting Administrative Privileges by using (sudo usermod -aG sudo ansible)
+4- we can Granting Administrative Privileges by using (sudo usermod -aG sudo ansible)
+5- sudo ufw app list (to check openssh is enabled and allowed from firewall .. this should be the output.
+(Output
+Available applications:
+  OpenSSH
+) 
+if not allowed we allow openssh by using this command (sudo ufw allow OpenSSH & sudo ufw enable) then check by (sudo ufw status)
+6- Enabling External Access for Your Regular User by this steps :
+   * sudo ssh-keygen 
+   * 
