@@ -16,6 +16,7 @@ ssh -T git@github.com (check connection between local machine and github)
 pwd -W (get current location in linux)
 
 * to build docker image from Dockerfile and push that image to docker hub in jenkinsfile :
+make sure to install Docker and Docker pipeline plugins to make jenkins run docker and put jenkins user in docker user group
 1- stage ('Docker Build and Push') {
             steps {
                 script {
