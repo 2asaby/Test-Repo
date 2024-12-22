@@ -13,3 +13,37 @@ git checkout -b <name of branch> (create and move to the new branch)
 git log <name of branch> (get log of selected branch)
 ssh -T git@github.com (check connection between local machine and github)
 pwd -W (get current location in linux)
+
+* to build docker image from Dockerfile and push that image to docker hub :
+1- stage ('Docker Build and Push') {
+            steps {
+                script {
+                    echo 'Building and pushing to Docker hub'
+                    docker.build("2asaby/devops:jenkins-test")
+
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub credential id') {
+                        docker.image("2asaby/devops:jenkins-test").push()
+                    }
+                }
+            }        
+        }
+
+2- stage('Docker build and push') {
+            steps {
+                echo 'building and push docker image to dockerhub'
+                withCredentials([usernamePassword(credentialsId: 'dockerhub credential id',
+                                                  passwordVariable: 'DOCKER_REGISTRY_PWD',
+                                                  usernameVariable: 'DOCKER_REGISTRY_USER')]) {
+                    script {
+                        sh '''
+                            docker build -t 2asaby/devops:jenkins-test .
+                            echo ${DOCKER_REGISTRY_PWD} | docker login -u ${DOCKER_REGISTRY_USER} --password-stdin
+                            docker push 2asaby/devops:jenkins-test
+                        '''
+
+                    }
+
+                }
+            }
+
+        }
