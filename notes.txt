@@ -47,8 +47,9 @@ make sure to install Docker and Docker pipeline plugins to make jenkins run dock
 
                 }
 
-* Ansible :
-
             }
 
         }
+
+
+* Ansible :
