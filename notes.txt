@@ -16,6 +16,9 @@ ssh -T git@github.com (check connection between local machine and github)
 pwd -W (get current location in linux)
 sudo usermod -aG sudo <user name> (to grant aministrator Privileges to specific user)
 sudo apt install openssh-server  (install ssh server on ubuntu machine)
+ssh remote_username@remote_host (ssh to remote machine)
+sudo deluser <user name> (delete user)
+
 
 * to build docker image from Dockerfile and push that image to docker hub in jenkinsfile :
 make sure to install Docker and Docker pipeline plugins to make jenkins run docker and put jenkins user in docker user group
