@@ -77,4 +77,11 @@ Available applications:
 if not allowed we allow openssh by using this command (sudo ufw allow OpenSSH & sudo ufw enable) then check by (sudo ufw status)
 6- Enabling External Access for Your Regular User by this steps :
    * sudo ssh-keygen 
+7- make sure openssh is running on all machine u want to connect with ansible with user ansible
+
+now we will proceed install ansible :
+    sudo apt update
+    sudo apt install software-properties-common
+    sudo add-apt-repository --yes --update ppa:ansible/ansible
+    sudo apt install ansible
    * 
