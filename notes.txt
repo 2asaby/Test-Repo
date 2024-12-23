@@ -1,0 +1,87 @@
+* Linux commands :
+sudo usermod -aG groupname username (add specific user to specific user group)
+cat /etc/group (show all user groups)
+git remote -v (show existing connection to which repo on github)
+ssh-keygen (create ssh rsa public and private key)
+ssh-keygen -t ecdsa (change type of generated public and private keys from rsa to ecdsa)
+ssh-copy-id -i ~/.ssh/id_rsa.pub user@host (copy ssh public id from machine to another machine to ssh without password)
+cd /var/lib/jenkins (path of jenkins on my machine )
+:wq! (force save when using vim )
+:qa (quit vim without saving)
+git diff (show what exactly modified)
+git reset --hard <commit id> (return to previous version of file  = ctrl+z)
+git checkout -b <name of branch> (create and move to the new branch)
+git log <name of branch> (get log of selected branch)
+ssh -T git@github.com (check connection between local machine and github)
+pwd -W (get current location in linux)
+sudo usermod -aG sudo <user name> (to grant aministrator Privileges to specific user)
+sudo apt install openssh-server  (install ssh server on ubuntu machine)
+ssh remote_username@remote_host (ssh to remote machine)
+sudo deluser <user name> (delete user)
+sudo vim /etc/hostname (to get name of machine or change it)
+sudo apt-get install vim (install vim on ubuntu)
+sudo vim /etc/hosts (to set internal DNS of machine .. add ip and name)
+
+
+* to build docker image from Dockerfile and push that image to docker hub in jenkinsfile :
+make sure to install Docker and Docker pipeline plugins to make jenkins run docker and put jenkins user in docker user group
+1- stage ('Docker Build and Push') {
+            steps {
+                script {
+                    echo 'Building and pushing to Docker hub'
+                    docker.build("2asaby/devops:jenkins-test")
+
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub credential id') {
+                        docker.image("2asaby/devops:jenkins-test").push()
+                    }
+                }
+            }        
+        }
+
+2- stage('Docker build and push') {
+            steps {
+                echo 'building and push docker image to dockerhub'
+                withCredentials([usernamePassword(credentialsId: 'dockerhub credential id',
+                                                  passwordVariable: 'DOCKER_REGISTRY_PWD',
+                                                  usernameVariable: 'DOCKER_REGISTRY_USER')]) {
+                    script {
+                        sh '''
+                            docker build -t 2asaby/devops:jenkins-test .
+                            echo ${DOCKER_REGISTRY_PWD} | docker login -u ${DOCKER_REGISTRY_USER} --password-stdin
+                            docker push 2asaby/devops:jenkins-test
+                        '''
+
+                    }
+
+                }
+
+            }
+
+        }
+
+
+* Ansible :
+to install Ansible on machine we must meet that prerequisites :
+1- login as root 
+2- add new user (sudo useradd -m <ansible>) and set password (sudo passwd ansible )
+3- sudo vim /etc/sudoers 
+( User privilege specification
+root    ALL=(ALL:ALL) ALL  // this previously exist 
+ansible  ALL=(ALL) NOPASSWD: ALL //add this line and type :wq! to force save to Granting Administrative Privileges )
+4- we can Granting Administrative Privileges by using (sudo usermod -aG sudo ansible)
+5- sudo ufw app list (to check openssh is enabled and allowed from firewall .. this should be the output.
+(Output
+Available applications:
+  OpenSSH
+) 
+if not allowed we allow openssh by using this command (sudo ufw allow OpenSSH & sudo ufw enable) then check by (sudo ufw status)
+6- Enabling External Access for Your Regular User by this steps :
+   * sudo ssh-keygen 
+7- make sure openssh is running on all machine u want to connect with ansible with user ansible
+
+now we will proceed install ansible :
+    sudo apt update
+    sudo apt install software-properties-common
+    sudo add-apt-repository --yes --update ppa:ansible/ansible
+    sudo apt install ansible
+    
