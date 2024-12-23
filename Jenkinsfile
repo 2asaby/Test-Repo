@@ -20,7 +20,7 @@ pipeline {
                     docker.build("2asaby/devops:jenkins-test")
 
                     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-mylab') {
-                        docker.image("2asaby/devops:jenkins-test").push()
+                        docker.image("2asaby/devops:jenkins-test1").push()
                     }
                 }
             }        
