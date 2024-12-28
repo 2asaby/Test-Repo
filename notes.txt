@@ -21,6 +21,7 @@ sudo deluser <user name> (delete user)
 sudo vim /etc/hostname (to get name of machine or change it)
 sudo apt-get install vim (install vim on ubuntu)
 sudo vim /etc/hosts (to set internal DNS of machine .. add ip and name)
+cp -r <source_dir>/* <dist_dir>   copy all data from dir to another
 
 
 * to build docker image from Dockerfile and push that image to docker hub in jenkinsfile :
