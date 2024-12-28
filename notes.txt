@@ -87,10 +87,18 @@ if not allowed we allow openssh by using this command (sudo ufw allow OpenSSH & 
    1- ANSIBLE_GATHERING=explicit ansible_playbook playbook.yml  (this only applicable in single playbook execution 'single command' )
    2- export ANSIBLE_GATHERING=explicit 
      ansible_playbook playbook.yml
-12- ansible commands: 
+12- default location of ansible inventory file (etc/ansible/hosts)
+13- ansible inventory parameters :
+   * ansible_host (ansible_host=server1.comapny.com)
+   * ansible_connection (ansible_connection=ssh .. for linux , ansible_connection=winrm .. for windows ) ex: (ansible_host=server1.comapny.com ansible_connection=ssh )
+   * ansible_port 
+   * ansible_user
+   * ansible_ssh_pass
+
+14- ansible commands: 
    ansible-config list   (list all configuration)
    ansible-config view   (show the current/active config file) 
-   ansible-config dump   (show comprehensive list of the current setting and where that setting picked from which config file)
+   ansible-config dump   (show comprehensive list of the current setting and where that setting picked from which config file) (ex: ansible-config dump | grep GATHERING)
 
 
 now we will proceed install ansible :
