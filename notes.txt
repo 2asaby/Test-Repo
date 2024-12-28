@@ -82,7 +82,11 @@ if not allowed we allow openssh by using this command (sudo ufw allow OpenSSH & 
 8- ansible configuration file location : /etc/ansible/ansible.cfg
 9- default location for playbooks /opt/example_playbooks .. to ovveride default parameters in ansible inside each playbook directory folder we take copy on ansible.cfg and then edit inside it 
 10- when i want to store ansible.cfg in different location except playbook directory we use this command :
-   * $ANSIBLE_CONFIG=/<ansible config file directory>/ansible.cfg ansible-playbook playbook.yml (this will override any config file in defult directory)
+   * ANSIBLE_CONFIG=/<ansible config file directory>/ansible.cfg ansible-playbook playbook.yml (this will override any config file in defult directory)
+11- to override any parameter in ansible.cfg we type the parameter in uppercase and prefixing (ANSIBLE_) to it and this will take the highest precedence (تأخذ الأسبقيه) and all other values specified in any config file will be ignored , there is 2 diff. ways to pass this envirnment variables :
+   1- ANSIBLE_GATHERING=explicit ansible_playbook playbook.yml 
+   2- export ANSIBLE_GATHERING=explicit 
+     ansible_playbook playbook.yml
 
 
 now we will proceed install ansible :
