@@ -78,6 +78,11 @@ if not allowed we allow openssh by using this command (sudo ufw allow OpenSSH & 
 6- Enabling External Access for Your Regular User by this steps :
    * sudo ssh-keygen 
 7- make sure openssh is running on all machine u want to connect with ansible with user ansible
+8- ansible configuration file location : /etc/ansible/ansible.cfg
+9- default location for playbooks /opt/example_playbooks .. to ovveride default parameters in ansible inside each playbook directory folder we take copy on ansible.cfg and then edit inside it 
+10- when i want to store ansible.cfg in different location except playbook directory we use this command :
+   * $ANSIBLE_CONFIG=/<ansible config file directory>/ansible.cfg ansible-playbook playbook.yml (this will override any config file in defult directory)
+
 
 now we will proceed install ansible :
     sudo apt update
