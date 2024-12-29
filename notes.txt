@@ -91,14 +91,16 @@ if not allowed we allow openssh by using this command (sudo ufw allow OpenSSH & 
 13- ansible inventory parameters :
    * ansible_host (ansible_host=server1.comapny.com)
    * ansible_connection (ansible_connection=ssh .. for linux , ansible_connection=winrm .. for windows ) ex: (ansible_host=server1.comapny.com ansible_connection=ssh )
-   * ansible_port 
-   * ansible_user
+   * ansible_port (ansible_post=22)
+   * ansible_user (ansible_user=root)
    * ansible_ssh_pass
+   * jinja2 templating ... it is method to pass var in ansible playbook '{{inter_ip_range}}'
 
 14- ansible commands: 
    ansible-config list   (list all configuration)
    ansible-config view   (show the current/active config file) 
    ansible-config dump   (show comprehensive list of the current setting and where that setting picked from which config file) (ex: ansible-config dump | grep GATHERING)
+ 
 
 
 now we will proceed install ansible :
