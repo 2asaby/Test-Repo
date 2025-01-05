@@ -85,7 +85,7 @@ if not allowed we allow openssh by using this command (sudo ufw allow OpenSSH & 
    * ANSIBLE_CONFIG=/<ansible config file directory>/ansible.cfg ansible-playbook playbook.yml (this will override any config file in defult directory)
 11- to override any parameter in ansible.cfg we type the parameter in uppercase and prefixing (ANSIBLE_) to it and this will take the highest precedence (تأخذ الأسبقيه) and all other values specified in any config file will be ignored , there is 2 diff. ways to pass this envirnment variables :
    1- ANSIBLE_GATHERING=explicit ansible_playbook playbook.yml  (this only applicable in single playbook execution 'single command' )
-   2- export ANSIBLE_GATHERING=explicit 
+   2- export ANSIBLE_GATHERING=explicit  (this will be applicable untill exit from shell )
      ansible_playbook playbook.yml
 12- default location of ansible inventory file (etc/ansible/hosts)
 13- ansible inventory parameters :
@@ -96,7 +96,10 @@ if not allowed we allow openssh by using this command (sudo ufw allow OpenSSH & 
    * ansible_ssh_pass
    * jinja2 templating ... it is method to pass var in ansible playbook '{{inter_ip_range}}'
 
-14- ansible commands: 
+14- host variables takes precedence over group variables but the playbook level will override both of them 
+    but (--extra-vars "dns_server=127.0.0.1") in the command line will take the highest periority and will override all previous values
+
+15- ansible commands: 
    ansible-config list   (list all configuration)
    ansible-config view   (show the current/active config file) 
    ansible-config dump   (show comprehensive list of the current setting and where that setting picked from which config file) (ex: ansible-config dump | grep GATHERING)
