@@ -109,12 +109,21 @@ if not allowed we allow openssh by using this command (sudo ufw allow OpenSSH & 
     * "group_names" .. that return all group names '{{group_names}}'
     * "inventory_hostname".. return name configured to the host in the inventory file
 
+* ansible_facts ... that file contain all fact/information about the host such as "memory, mac, operating system, ip, etc ..." , ansible only gather facts from hosts only part of the playbook
+
 16- ansible commands: 
    ansible-config list   (list all configuration)
    ansible-config view   (show the current/active config file) 
    ansible-config dump   (show comprehensive list of the current setting and where that setting picked from which config file) (ex: ansible-config dump | grep GATHERING)
+   ansible-playbook -i inventory playbook.yaml (to run playbook)
  
+17- verify playbooks:
+   * check mode:  " No actual changes are made on the hossts" we can do it by using "--check" option to run a playbook in check mode ex (ansible-playebook install_nginx.yml --check)
+   * diff mode: provide before-and-after comparison of the state after the playbook is run, we use it by using "--diff" option  
+   * syntax mode: ensure playbook syntax is error-free , we can use it by using "--syntax-check" option
 
+* ansible-lint: it is command-line tool that perform linting on Ansible playbooks, roles and collections, it checks your code for potential errors, bugs, stylistic errors, and suspicious constructs
+                we use it by "ansible-lint playbook.yml"
 
 now we will proceed install ansible :
     sudo apt update
