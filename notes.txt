@@ -88,18 +88,28 @@ if not allowed we allow openssh by using this command (sudo ufw allow OpenSSH & 
    2- export ANSIBLE_GATHERING=explicit  (this will be applicable untill exit from shell )
      ansible_playbook playbook.yml
 12- default location of ansible inventory file (etc/ansible/hosts)
-13- ansible inventory parameters :
+13- we can write inventory file with INI or YAML format but YAML is more structured and flexible than the INI formats
+14- ansible inventory variables :
    * ansible_host (ansible_host=server1.comapny.com)
    * ansible_connection (ansible_connection=ssh .. for linux , ansible_connection=winrm .. for windows ) ex: (ansible_host=server1.comapny.com ansible_connection=ssh )
    * ansible_port (ansible_post=22)
    * ansible_user (ansible_user=root)
    * ansible_ssh_pass
-   * jinja2 templating ... it is method to pass var in ansible playbook '{{inter_ip_range}}'
-
-14- host variables takes precedence over group variables but the playbook level will override both of them 
+   * jinja2 templating ... it is method to use variables like "http_port, snmp_port, inter_ip_range,  etc.." in ansible playbook '{{inter_ip_range}}'
+   * we can use list variables in ansible playbook with this format "{{packages[0]}}"
+ 
+15- host variables takes precedence over group variables but the playbook level will override both of them 
     but (--extra-vars "dns_server=127.0.0.1") in the command line will take the highest periority and will override all previous values
 
-15- ansible commands: 
+*  we use 'register: result' to capture the output from one command inside playbook to use it in another command 
+
+* magic variables:
+    * "hostvars" .. to get any information that difined only in specific host we use variable '{{hostvars['hostname'].variablename}}'
+    * "groups" .. that return all hosts under a given group .. ex .. '{{groups['groupname']}}'
+    * "group_names" .. that return all group names '{{group_names}}'
+    * "inventory_hostname".. return name configured to the host in the inventory file
+
+16- ansible commands: 
    ansible-config list   (list all configuration)
    ansible-config view   (show the current/active config file) 
    ansible-config dump   (show comprehensive list of the current setting and where that setting picked from which config file) (ex: ansible-config dump | grep GATHERING)
