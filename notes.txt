@@ -123,7 +123,10 @@ if not allowed we allow openssh by using this command (sudo ufw allow OpenSSH & 
    * syntax mode: ensure playbook syntax is error-free , we can use it by using "--syntax-check" option
 
 * ansible-lint: it is command-line tool that perform linting on Ansible playbooks, roles and collections, it checks your code for potential errors, bugs, stylistic errors, and suspicious constructs
-                we use it by "ansible-lint playbook.yml"
+                we use it by "ansible-lint playbook.yml" 
+
+* we can use ansible_facts['os_family'] == 'Debian' AND ansible_facts['distribution_major_version'] == '18' to determine operating system type and version
+* inventory_hostname == "hostname" ... to select specific host from inventory file in playbook
 
 now we will proceed install ansible :
     sudo apt update
