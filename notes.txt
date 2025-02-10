@@ -1,3 +1,4 @@
+
 * Linux commands :
 sudo usermod -aG groupname username (add specific user to specific user group)
 cat /etc/group (show all user groups)
@@ -110,6 +111,10 @@ if not allowed we allow openssh by using this command (sudo ufw allow OpenSSH & 
     * "inventory_hostname".. return name configured to the host in the inventory file
 
 * ansible_facts ... that file contain all fact/information about the host such as "memory, mac, operating system, ip, etc ..." , ansible only gather facts from hosts only part of the playbook
+  we can show ansible_facts by using:
+                 Tasks: 
+                 - debug: 
+                     var: ansible_facts
 
 16- ansible commands: 
    ansible-config list   (list all configuration)
@@ -133,4 +138,52 @@ now we will proceed install ansible :
     sudo apt install software-properties-common
     sudo add-apt-repository --yes --update ppa:ansible/ansible
     sudo apt install ansible
-    
+
+18- ansible modules: 
+   * system (user,group,hostname,iptables,make,mount,ping,lvg,lvol,timezone,systemd,service,lineinfile)
+   * command (command,expect,raw,script,shell)
+   * files (acl,archive,unarchive,copy,file,replace,stat,template,find)
+   * database (mangodb,mssql,mysql,postgresql,proxysql,vertica)
+   * cloud (amazon,docker,google,vmware,etc..)
+   * windows (win_copy,win_command,win_domain,win_file,win_msi,win_regedit,etc..)
+   * more..
+* Ansible support idempotancy
+* ansible-galaxy init <role_name> (create and initialize directory structure to create your own role from scratch)
+* you can create roles folder in your playbook directory and move your role to it or put in the common dir. for  roles (etc/ansible/roles)
+* to find roles search ansible galaxy from ui or from command line (ansible-galaxy search <role_name>)
+* to use a role from ansible galaxy run (ansible-galaxy install <role_name>)
+* we use role in playbook like that: 
+         - roles:
+             -mysql
+
+*** Kubernetes *** (it is an open source Orchestration tool that manages Dockerized applications)
+     1- self healing (keep desired state)
+     2- automatic update
+     3- automatic rollback
+     4- load balancing
+     5- service discovery (kubernetes has internal DNS that allow services communicate to each others with it's name)
+     6- auto scaling
+     7- high availability of containers
+     8- allocation of hardware resources between containers
+
+* Types of deployments:
+  1- Recreate Doployment (has down time)
+  2- Rolling update (has no down time and used by Kubernetes)(it creates 2 containers from new version then move traffic to the new ones after that drop all the old)
+  3- canary deployment (it creates small environment from new version and move some of users to use the new one and wait feedback if it is ok we replace all old ones)
+  4- blue-green deployment (it is highly cost, it creates new same updated environments and move all traffic to it ,if it is ok we drop the old one)
+
+* Kubectl .. (that is command line tool to write Kubernetes commands to control kubernetes cluster that interacts with kube-API Server and sends commands to the master node, each command is converted to api call)
+* Kubernetes Master component:
+   1- API server (it is the primary component, any communication within the cluster go through that server)
+   2- Schedular (that respinsible to take decision which pod will run on which node)
+   3- Controller-manager (it manages all controllers like :
+           1- Replication controller: that responsible to monitor all pods health and state to keep desired state , restart or replace or reschedule pods to another node.
+           2- Node controller: that monitor all nodes state, if there is any problem in the node he will reschedule all pods to another node,it check for nodes with a signal every 5 seconds if any node didn't reply
+                               for 40 seconds, it marks that node unhealthy, and gives it chance for 5 minutes to return healthy, if not, all pods on that node will rescheduled to another node
+   4- etcd (database for cluster,it is key-value database)
+
+* Kubernetes worker node component:
+   1- Kubelet (that is the agent or deamon or service that responsible for any communication between master and worker node)
+   2- Kube-proxy (it is the networking solution for node, it has list of ip and list of pods that allow him to detemine the incoming traffic should go to which pod)
+   3- Docker agent (that creates pods on the node)
+   4- Pods (list of running pods)
